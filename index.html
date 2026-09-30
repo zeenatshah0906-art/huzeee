@@ -1464,150 +1464,67 @@ function gameAnswer(answer){
 /* =========================
    THINGS I LOVE
 ========================= */
-
 const loveTexts = {
 
-
-1:`
-
-<strong>
-♡ “Aaj pata hai kya hua?”
-</strong>
-
+1: `
+<strong>♡ “Aaj pata hai kya hua?”</strong>
 <br><br>
-
 I love the way you actually show interest whenever I come to you with my
 “aaj pata hai kya hua?” 😭❤️
-
 You listen to every little detail, even when I probably tell you way too much.
-
 `,
 
-
-2:`
-
-<strong>
-♡ Your way of convincing me
-</strong>
-
+2: `
+<strong>♡ Your way of convincing me</strong>
 <br><br>
-
 I love how you always convince me when I'm angry—even when it's my fault,
 your fault, or whoever's fault it is...
-
 somehow, <b>it's always yours.</b> 😭😂❤️
-
 `,
 
-
-3:`
-
-<strong>
-♡ Your 2 rupaye ke jokes
-</strong>
-
+3: `
+<strong>♡ Your 2 rupaye ke jokes</strong>
 <br><br>
-
 I love how you make me feel comfortable whenever I'm not in a good mood.
-
 Somehow, you always manage to bring my spark back with your
 <b>2 rupaye ke jokes</b> 😭🙏🏻...
-
 and the worst part is,
-
 <b>I actually love them.</b> ❤️
-
 `,
 
-
-4:`
-
-<strong>
-♡ The way you love me
-</strong>
-
+4: `
+<strong>♡ The way you love me</strong>
 <br><br>
-
 You always make me feel loved, valued, and cared for in a way no one ever has.
+And honestly, that's something I'll always be grateful for. ❤️
 
-And honestly, that's something I'll always be grateful for that.
-
-<br><br>
-
-<b>
-
-Keep loving me and always take care of me —
-that's the important purpose of your life!!
-
-</b>
-
-😭❤️
-
+Keep loving me and always take care of me — that's the important purpose of your life!! 😭❤️
 `
 
 };
 
-
-
-function love(number){
-
-    const box =
-    document.getElementById('loveContent');
-
-
-    box.innerHTML =
-    loveTexts[number];
-
-
+function love(number) {
+    const box = document.getElementById('loveContent');
+    box.innerHTML = loveTexts[number];
     box.classList.add('show');
-
 }
 
-
-
-/* =========================
-   SONGS
-========================= */
-
-function toggleSong(number){
-
-    const body =
-    document.getElementById('song' + number);
-
-
+function toggleSong(number) {
+    const body = document.getElementById('song' + number);
     body.classList.toggle('show');
-
 }
 
+function unlockVideo() {
+    const videoBox = document.getElementById('videoBox');
+    videoBox.classList.add('show');
 
-
-/* =========================
-   FINAL VIDEO
-========================= */
-
-function unlockVideo(){
-
-    const box =
-    document.getElementById('videoBox');
-
-
-    box.classList.add('show');
-
-
-    setTimeout(() => {
-
-        box.scrollIntoView({
-            behavior:'smooth',
-            block:'center'
-        });
-
-    },200);
-
+    videoBox.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+    });
 }
 
 </script>
 
-
 </body>
 </html>
-
