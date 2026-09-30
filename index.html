@@ -1,1 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>For You 💛🌸</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fff7c7, #ffe5ef);
+  color: #4b3540;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.screen {
+  display: none;
+  min-height: 100vh;
+  padding: 35px 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.card {
+  width: min(520px, 100%);
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 35px 25px;
+  box-shadow: 0 15px 45px rgba(120,80,90,0.15);
+}
+
+h1 {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 48px;
+  margin: 10px 0;
+}
+
+h2 {
+  font-size: 25px;
+}
+
+p {
+  line-height: 1.7;
+}
+
+.small {
+  font-size: 13px;
+  opacity: .7;
+}
+
+button {
+  border: none;
+  padding: 14px 24px;
+  border-radius: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 7px;
+  background: #ffd84d;
+  color: #4b3540;
+  box-shadow: 0 7px 15px rgba(0,0,0,.1);
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.pink {
+  background: #ffb8d0;
+}
+
+.dark {
+  background: #4b3540;
+  color: white;
+}
+
+.emoji {
+  font-size: 55px;
+}
+
+.question {
+  font-size: 25px;
+  font-weight: 600;
+  margin: 25px 0;
+}
+
+.reaction {
+  min-height: 55px;
+  font-weight: 600;
+  color: #e45c86;
+}
+
+.heart {
+  position: fixed;
+  font-size: 25px;
+  animation: float 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh) rotate(0);
+    opacity: 0;
+  }
+  20% { opacity: 1; }
+  to {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* GAME */
+
+.game-area {
+  position: relative;
+  height: 300px;
+  border-radius: 25px;
+  background: #fff9df;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.game-heart {
+  position: absolute;
+  font-size: 35px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.score {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* SONGS */
+
+.song {
+  background: rgba(255,255,255,.9);
+  border-radius: 22px;
+  padding: 18px;
+  margin: 15px 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.song-title {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.lyrics {
+  display: none;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.song.open .lyrics {
+  display: block;
+}
+
+.spotify {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 15px;
+  border-radius: 20px;
+  background: #1db954;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* MEMORIES */
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.memory {
+  aspect-ratio: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg,#ffe8a8,#ffc8dc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+}
+
+.memory img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* LETTER */
+
+.letter {
+  background: #fffaf0;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: left;
+  line-height: 1.9;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 19px;
+}
+
+/* VIDEO */
+
+.video-box {
+  display: none;
+  margin-top: 25px;
+}
+
+.video-box video {
+  width: 100%;
+  border-radius: 20px;
+}
+
+/* FINAL */
+
+.final-heart {
+  font-size: 90px;
+  animation: beat 1s infinite;
+}
+
+@keyframes beat {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING HEARTS -->
+<script>
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = Math.random() > .5 ? "💛" : "🌸";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+}, 900);
+</script>
+
+
+<!-- 1. OPENING -->
+
+<section class="screen active" id="screen1">
+  <div class="card">
+
+    <div class="emoji">🌸⚡</div>
+
+    <h1>Hey you...</h1>
+
+    <p>
+      I made a tiny little something for you.
+      <br>
+      But there's a rule...
+    </p>
+
+    <p class="small">
+      You have to actually play along 😭
+    </p>
+
+    <button onclick="goTo(2)">
+      OPEN YOUR SURPRISE 💌
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 2. RULES -->
+
+<section class="screen" id="screen2">
+  <div class="card">
+
+    <div class="emoji">👀</div>
+
+    <h1>Before we start...</h1>
+
+    <p>There are only 3 rules.</p>
+
+    <p>
+      ❌ No cheating<br>
+      ❌ No skipping<br>
+      ❌ Wrong answers will be judged 😭
+    </p>
+
+    <button onclick="goTo(3)">
+      Okay okay 😭
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 3. QUESTION 1 -->
+
+<section class="screen" id="screen3">
+  <div class="card">
+
+    <div class="emoji">💛</div>
+
+    <div class="question">
+      Do you love me?
+    </div>
+
+    <div class="reaction" id="reaction1"></div>
+
+    <button onclick="goTo(4)">YES 😌</button>
+
+    <button class="pink" onclick="wrong1()">
+      NO
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 4. QUESTION 2 -->
+
+<section class="screen" id="screen4">
+  <div class="card">
+
+    <div class="emoji">🌸</div>
+
+    <div class="question">
+      Who is the cutest person here?
+    </div>
+
+    <div class="reaction" id="reaction2"></div>
+
+    <button onclick="wrong2()">YOU</button>
+
+    <button class="pink" onclick="goTo(5)">
+      ME 😌
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 5. QUESTION 3 -->
+
+<section class="screen" id="screen5">
+  <div class="card">
+
+    <div class="emoji">🥺</div>
+
+    <div class="question">
+      Would you choose me again?
+    </div>
+
+    <div class="reaction" id="reaction3"></div>
+
+    <button onclick="goTo(6)">
+      ALWAYS 💛
+    </button>
+
+    <button class="pink" onclick="wrong3()">
+      NO
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 6. MINI GAME -->
+
+<section class="screen" id="screen6">
+  <div class="card">
+
+    <h1>Mini Game 🌸</h1>
+
+    <p>
+      Catch <b>3 hearts</b> before they disappear.
+    </p>
+
+    <div class="score">
+      Hearts: <span id="score">0</span> / 3
+    </div>
+
+    <div class="game-area" id="gameArea"></div>
+
+    <p id="gameMessage"></p>
+
+  </div>
+</section>
+
+
+<!-- 7. SONGS -->
+
+<section class="screen" id="screen7">
+  <div class="card">
+
+    <div class="emoji">🎧</div>
+
+    <h1>Lyrics That Remind Me Of You</h1>
+
+    <p class="small">
+      Tap a song... maybe you'll understand why I chose it.
+    </p>
+
+
+    <div class="song" onclick="toggleSong(this)">
+
+      <div class="song-title">
+        🎵 Kho Gye
+      </div>
+
+      <div class="lyrics">
+
+        kaagaz ke panno pe me likhdu tera naam<br>
+        lakeero me hi likhde tu anjaam,<br>
+        me tera tu meri<br>
+        dheere dheere se kho gye<br>
+        dheere se kho gye<br>
+        kahi tu meri<br>
+        dheere dheere se kho gye<br>
+        dheere se kho gye
+
+        <br><br>
+
+        <a
+          class="spotify"
+          href="https://open.spotify.com/track/2QophXhN2Ls2URfoPmiviC?si=UKVYupLPS4mrcy8UVaD3Wg&utm_source=copy-link&pi=wIicjXOqQWiTP"
+      
+          target="_blank"
+          onclick="event.stopPropagation()">
+          🎧 Open on Spotify
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="song" onclick="toggleSong(this)">
+
+      <div class="song-title">
+        🎵 O Maahi
+      </div>
+
+      <div class="lyrics">
+
+        lo me Qayamat tak hua tera<br>
+        lo me Qayamat tak hua tera<br>
+        mere ishq pe haq hua tera<br>
+        lo me Qayamat tak hua tera<br>
+        maahii, maahi ve<br>
+        oo maahive
+
+        <br><br>
+
+        <a
+          class="spotify"
+          href="https://open.spotify.com/track/0qQ4IdhjzNr0gJhdMTf2n3?si=WgiQUYyVQTymQ-5lt6AB8A&utm_source=copy-link&pi=vknxc-4lQr6NG"
+          target="_blank"
+          onclick="event.stopPropagation()">
+          🎧 Open on Spotify
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="song" onclick="toggleSong(this)">
+
+      <div class="song-title">
+        🎵 Hey Shona
+      </div>
+
+      <div class="lyrics">
+
+        tumhi mere har pal me<br>
+        tum aaj me tum kal me<br>
+        heyy shona<br>
+        hey shonaa
+
+        <br><br>
+
+        <a
+          class="spotify"
+          href="YOUR_SPOTIFY_LINK_3"
+          target="_blank"
+          onclick="event.stopPropagation()">
+          🎧 Open on Spotify
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <button onclick="goTo(8)">
+      Continue 🌸
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 8. MEMORIES -->
+
+<section class="screen" id="screen8">
+  <div class="card">
+
+    <div class="emoji">📸</div>
+
+    <h1>Our Little Memories</h1>
+
+    <p>
+      Some things are better kept here...
+    </p>
+
+    <div class="memory-grid">
+
+      <div class="memory">
+        <img
+          src="images/photo1.jpg"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='📸';">
+      </div>
+
+      <div class="memory">
+        <img
+          src="images/photo2.jpg"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='🌸';">
+      </div>
+
+      <div class="memory">
+        <img
+          src="images/photo3.jpg"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='💛';">
+      </div>
+
+      <div class="memory">
+        <img
+          src="images/photo4.jpg"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='⚡';">
+      </div>
+
+    </div>
+
+    <br>
+
+    <button onclick="goTo(9)">
+      There's something I want to tell you...
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 9. LETTER -->
+
+<section class="screen" id="screen9">
+  <div class="card">
+
+    <div class="emoji">💌</div>
+
+    <h1>One little letter...</h1>
+
+    <div class="letter">
+
+      Hey you,
+
+      <br><br>
+
+      If you somehow made it all the way here,
+      then first of all... congratulations 😭
+
+      <br><br>
+
+      I don't really know how to put everything
+      I feel into words, but I just wanted you to
+      know that you mean a lot to me.
+
+      <br><br>
+
+      Thank you for being a part of my life,
+      for the little moments, the laughs,
+      the memories and everything in between.
+
+      <br><br>
+
+      Happy Boyfriend's Day. 💛
+
+      <br><br>
+
+      — Your favourite person 🌸
+
+    </div>
+
+    <br>
+
+    <button onclick="goTo(10)">
+      One last thing... 👀
+    </button>
+
+  </div>
+</section>
+
+
+<!-- 10. FINAL -->
+
+<section class="screen" id="screen10">
+  <div class="card">
+
+    <div class="final-heart">
+      💛
+    </div>
+
+    <h1>Happy Boyfriend's Day</h1>
+
+    <p>
+      You actually made it to the end.
+    </p>
+
+    <p>
+      But...
+      <br>
+      I saved one tiny thing for last. 👀
+    </p>
+
+    <button onclick="unlockVideo()">
+      ✨ UNLOCK ONE LAST THING ✨
+    </button>
+
+
+    <div class="video-box" id="videoBox">
+
+      <p>
+        Okay... this one's just for you. 🥺
+      </p>
+
+      <video controls>
+        <source src="video/final-video.mp4" type="video/mp4">
+        Your browser does not support video.
+      </video>
+
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+
+function goTo(number) {
+
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+
+  document.getElementById("screen" + number).classList.add("active");
+
+  window.scrollTo(0,0);
+}
+
+
+/* WRONG ANSWERS */
+
+function wrong1() {
+
+  document.getElementById("reaction1").innerHTML =
+  "HOW DARE YOU 😭💀 You get ONE more chance.";
+
+}
+
+function wrong2() {
+
+  document.getElementById("reaction2").innerHTML =
+  "WRONG ANSWER 😭💀 I literally made this question easy.";
+
+}
+
+function wrong3() {
+
+  document.getElementById("reaction3").innerHTML =
+  "EXCUSE ME???? 😭 Try that again.";
+
+}
+
+
+/* MINI GAME */
+
+let score = 0;
+
+function createHeart() {
+
+  const area = document.getElementById("gameArea");
+
+  const heart = document.createElement("div");
+
+  heart.className = "game-heart";
+
+  heart.innerHTML = Math.random() > .5 ? "💛" : "🌸";
+
+  heart.style.left =
+    Math.random() * 85 + "%";
+
+  heart.style.top =
+    Math.random() * 80 + "%";
+
+  heart.onclick = function() {
+
+    score++;
+
+    document.getElementById("score").innerText = score;
+
+    heart.remove();
+
+    if(score >= 3) {
+
+      document.getElementById("gameMessage").innerHTML =
+      "<b>GAME COMPLETE! 🌸⚡</b><br>You found all the love.";
+
+      setTimeout(() => {
+        goTo(7);
+      }, 1800);
+
+    } else {
+
+      createHeart();
+
+    }
+
+  };
+
+  area.appendChild(heart);
+}
+
+createHeart();
+
+
+/* SONGS */
+
+function toggleSong(song) {
+
+  song.classList.toggle("open");
+
+}
+
+
+/* VIDEO */
+
+function unlockVideo() {
+
+  document.getElementById("videoBox").style.display = "block";
+
+  document.getElementById("videoBox").scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+</script>
+
+</body>
+  </html>
