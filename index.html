@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Favourite Person ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#fff8f5;
+    color:#4a3035;
+    font-family:'Quicksand',sans-serif;
+    overflow-x:hidden;
+}
+
+.screen{
+    display:none;
+    min-height:100vh;
+    padding:35px 20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.screen.active{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    animation:fadeIn .7s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   DOODLES
+========================= */
+
+.doodle{
+    position:absolute;
+    font-size:25px;
+    opacity:.75;
+    pointer-events:none;
+    animation:float 4s ease-in-out infinite;
+}
+
+.d1{
+    top:8%;
+    left:8%;
+}
+
+.d2{
+    top:15%;
+    right:8%;
+    animation-delay:1s;
+}
+
+.d3{
+    bottom:12%;
+    left:7%;
+    animation-delay:2s;
+}
+
+.d4{
+    bottom:18%;
+    right:9%;
+    animation-delay:1.5s;
+}
+
+.d5{
+    top:45%;
+    left:3%;
+    animation-delay:.5s;
+}
+
+.d6{
+    top:55%;
+    right:3%;
+    animation-delay:2.5s;
+}
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0) rotate(-5deg);
+    }
+
+    50%{
+        transform:translateY(-10px) rotate(5deg);
+    }
+
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.small{
+    font-size:13px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    opacity:.7;
+}
+
+h1,
+h2{
+    font-family:'Caveat',cursive;
+    color:#d94c69;
+}
+
+h1{
+    font-size:55px;
+    line-height:1;
+}
+
+h2{
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+.subtitle{
+    max-width:520px;
+    text-align:center;
+    line-height:1.7;
+    margin:12px 0 25px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+    border:none;
+    padding:14px 23px;
+    border-radius:30px;
+    background:#f5a6b8;
+    color:white;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    box-shadow:0 7px 20px rgba(217,76,105,.18);
+    transition:.25s;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.btn.secondary{
+    background:#ffd76e;
+    color:#5a3d25;
+}
+
+.btn.light{
+    background:white;
+    color:#d94c69;
+    border:2px solid #f4b1c0;
+}
+
+
+/* =========================
+   OPENING
+========================= */
+
+.hero{
+    text-align:center;
+    max-width:600px;
+}
+
+.hero-img{
+    width:min(360px,85vw);
+    margin:15px auto;
+    display:block;
+    filter:drop-shadow(0 15px 20px rgba(100,50,50,.12));
+    animation:softBounce 3s ease-in-out infinite;
+}
+
+@keyframes softBounce{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+
+/* =========================
+   RULES
+========================= */
+
+.rules-card{
+    background:rgba(255,255,255,.9);
+    border:2px solid #f8c3ce;
+    border-radius:28px;
+    padding:25px;
+    width:min(420px,92vw);
+    box-shadow:0 15px 40px rgba(120,60,60,.08);
+}
+
+.rules-card p{
+    margin:12px 0;
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+.question-box{
+    width:min(500px,92vw);
+    text-align:center;
+}
+
+.question{
+    background:white;
+    border-radius:30px;
+    padding:30px 20px;
+    box-shadow:0 15px 40px rgba(100,50,50,.08);
+    margin:20px 0;
+}
+
+.answers{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.reaction{
+    min-height:35px;
+    margin-top:18px;
+    font-family:'Caveat',cursive;
+    font-size:28px;
+    color:#e33e63;
+}
+
+
+/* =========================
+   GAME
+========================= */
+
+.game-box{
+    width:min(520px,94vw);
+    text-align:center;
+}
+
+.game-card{
+    background:white;
+    padding:28px 20px;
+    border-radius:30px;
+    box-shadow:0 15px 40px rgba(100,50,50,.09);
+    margin-top:20px;
+}
+
+.game-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-top:22px;
+}
+
+.game-option{
+    border:2px solid #f5bac7;
+    background:#fff8fa;
+    border-radius:22px;
+    padding:18px 10px;
+    cursor:pointer;
+    font-family:'Quicksand',sans-serif;
+    font-weight:600;
+    color:#573b40;
+    transition:.25s;
+}
+
+.game-option:hover{
+    transform:scale(1.03);
+    background:#fff0f4;
+}
+
+.game-result{
+    font-family:'Caveat',cursive;
+    font-size:27px;
+    color:#d94c69;
+    min-height:42px;
+    margin-top:20px;
+}
+
+
+/* =========================
+   THINGS I LOVE
+========================= */
+
+.love-grid{
+    width:min(600px,94vw);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:20px;
+}
+
+.love-button{
+    border:none;
+    border-radius:25px;
+    padding:22px 14px;
+    background:white;
+    border:2px solid #f7c2cc;
+    color:#5a3b40;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(100,50,50,.07);
+    transition:.25s;
+}
+
+.love-button:hover{
+    transform:translateY(-4px) rotate(-1deg);
+}
+
+.love-number{
+    font-family:'Caveat',cursive;
+    font-size:30px;
+    color:#d94c69;
+    display:block;
+}
+
+.love-content{
+    width:min(600px,94vw);
+    background:white;
+    border-radius:28px;
+    padding:25px;
+    margin-top:18px;
+    border:2px solid #f7c2cc;
+    display:none;
+    animation:pop .4s ease;
+    line-height:1.8;
+}
+
+.love-content.show{
+    display:block;
+}
+
+@keyframes pop{
+
+    from{
+        opacity:0;
+        transform:scale(.92);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+
+/* =========================
+   SONGS
+========================= */
+
+.song-list{
+    width:min(620px,94vw);
+}
+
+.song{
+    background:white;
+    border-radius:25px;
+    margin:12px 0;
+    overflow:hidden;
+    border:2px solid #f7c5cf;
+}
+
+.song-title{
+    padding:18px;
+    cursor:pointer;
+    font-weight:700;
+    display:flex;
+    justify-content:space-between;
+}
+
+.song-body{
+    display:none;
+    padding:0 20px 25px;
+    text-align:center;
+}
+
+.song-body.show{
+    display:block;
+    animation:fadeIn .4s ease;
+}
+
+.lyrics{
+    font-family:'Caveat',cursive;
+    font-size:25px;
+    line-height:1.7;
+    margin:15px 0 20px;
+    color:#70444d;
+}
+
+
+/* =========================
+   LETTER
+========================= */
+
+.letter{
+    width:min(650px,94vw);
+    background:#fffdf8;
+    border:2px solid #f3d7a7;
+    border-radius:25px;
+    padding:28px 23px;
+    box-shadow:0 15px 40px rgba(100,70,30,.08);
+    line-height:1.8;
+    text-align:left;
+}
+
+.letter p{
+    margin-bottom:18px;
+}
+
+.letter .special{
+    font-family:'Caveat',cursive;
+    color:#d94c69;
+    font-size:27px;
+    text-align:center;
+    margin:25px 0;
+}
+
+
+/* =========================
+   FINAL
+========================= */
+
+.final-heart{
+    font-size:65px;
+    animation:heartBeat 1.3s infinite;
+}
+
+@keyframes heartBeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.15);
+    }
+
+}
+
+.video-box{
+    width:min(650px,94vw);
+    margin-top:25px;
+    display:none;
+}
+
+.video-box.show{
+    display:block;
+    animation:fadeIn .8s ease;
+}
+
+video{
+    width:100%;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(80,40,40,.15);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:520px){
+
+    h1{
+        font-size:48px;
+    }
+
+    h2{
+        font-size:39px;
+    }
+
+    .love-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .game-options{
+        grid-template-columns:1fr;
+    }
+
+    .screen{
+        padding:28px 15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- DOODLES -->
+
+<div class="doodle d1">♡</div>
+<div class="doodle d2">⚡</div>
+<div class="doodle d3">🌸</div>
+<div class="doodle d4">♡</div>
+<div class="doodle d5">✦</div>
+<div class="doodle d6">🌸</div>
+
+
+
+<!-- =========================
+     1. OPENING
+========================= -->
+
+<section class="screen active" id="s1">
+
+<div class="hero">
+
+<div class="small">
+A little something for you...
+</div>
+
+<h1>
+Hey you... ❤️
+</h1>
+
+<img
+src="images/zenitsu-nezuko.jpg"
+class="hero-img"
+alt="Zenitsu and Nezuko"
+>
+
+<p class="subtitle">
+
+I made something for my favourite person.<br>
+
+So please... don't skip anything. 👀
+
+</p>
+
+<button class="btn" onclick="go('s2')">
+
+OPEN YOUR SURPRISE 💌
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     2. RULES
+========================= -->
+
+<section class="screen" id="s2">
+
+<h2>
+Before we begin... 🌸
+</h2>
+
+<div class="rules-card">
+
+<p>♡ No skipping.</p>
+
+<p>♡ No cheating.</p>
+
+<p>♡ Answer honestly.</p>
+
+<p>♡ And most importantly...</p>
+
+<p>
+<b>
+you HAVE to finish everything. 😭❤️
+</b>
+</p>
+
+</div>
+
+<br>
+
+<button class="btn" onclick="go('s3')">
+
+Okay okay, let's go →
+
+</button>
+
+</section>
+
+
+
+<!-- =========================
+     3. QUESTION 1
+========================= -->
+
+<section class="screen" id="s3">
+
+<div class="question-box">
+
+<div class="small">
+Question 01
+</div>
+
+<div class="question">
+
+<h2>
+Do you love me?
+</h2>
+
+<div class="answers">
+
+<button
+class="btn"
+onclick="go('s4')"
+>
+YES ❤️
+</button>
+
+<button
+class="btn light"
+onclick="wrong('r1','HOW DARE YOU 😭💀')"
+>
+NO
+</button>
+
+</div>
+
+<div class="reaction" id="r1"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     4. QUESTION 2
+========================= -->
+
+<section class="screen" id="s4">
+
+<div class="question-box">
+
+<div class="small">
+Question 02
+</div>
+
+<div class="question">
+
+<h2>
+Who is the cutest person here?
+</h2>
+
+<div class="answers">
+
+<button
+class="btn light"
+onclick="wrong('r2','WRONG ANSWER 😭🙏🏻')"
+>
+YOU
+</button>
+
+<button
+class="btn"
+onclick="go('s5')"
+>
+ME OBVIOUSLY 😌❤️
+</button>
+
+</div>
+
+<div class="reaction" id="r2"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     5. QUESTION 3
+========================= -->
+
+<section class="screen" id="s5">
+
+<div class="question-box">
+
+<div class="small">
+Question 03
+</div>
+
+<div class="question">
+
+<h2>
+Would you choose me again?
+</h2>
+
+<div class="answers">
+
+<button
+class="btn"
+onclick="go('s6')"
+>
+ALWAYS ❤️
+</button>
+
+<button
+class="btn light"
+onclick="wrong('r3','EXCUSE ME???? 😭')"
+>
+NO
+</button>
+
+</div>
+
+<div class="reaction" id="r3"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     6. NEW GAME
+========================= -->
+
+<section class="screen" id="s6">
+
+<div class="game-box">
+
+<div class="small">
+A tiny little game...
+</div>
+
+<h2>
+Unlock My Heart 💗
+</h2>
+
+<p class="subtitle">
+
+There are four little moments hidden here.
+
+Choose the one that feels the most like <b>us</b>.
+
+</p>
+
+<div class="game-card">
+
+<div id="gameQuestion">
+
+Which one would you choose for a perfect day with me? 🥹
+
+</div>
+
+
+<div class="game-options">
+
+<button
+class="game-option"
+onclick="gameAnswer('wrong')"
+>
+
+🌧️ Sitting quietly together
+
+</button>
+
+
+<button
+class="game-option"
+onclick="gameAnswer('right')"
+>
+
+😂 Laughing at absolutely stupid things
+
+</button>
+
+
+<button
+class="game-option"
+onclick="gameAnswer('wrong')"
+>
+
+🎬 Watching a movie
+
+</button>
+
+
+<button
+class="game-option"
+onclick="gameAnswer('wrong')"
+>
+
+🍕 Eating something together
+
+</button>
+
+</div>
+
+
+<div
+class="game-result"
+id="gameResult"
+></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     7. THINGS I LOVE
+========================= -->
+
+<section class="screen" id="s7">
+
+<div class="small">
+A few things...
+</div>
+
+<h2>
+Things I Love About You ❤️
+</h2>
+
+<p class="subtitle">
+
+Okay, there are obviously WAY more than four...
+
+but these are some of my favourites. 🥹
+
+</p>
+
+
+<div class="love-grid">
+
+
+<button
+class="love-button"
+onclick="love(1)"
+>
+
+<span class="love-number">
+01
+</span>
+
+“Aaj pata hai kya hua?”
+
+</button>
+
+
+<button
+class="love-button"
+onclick="love(2)"
+>
+
+<span class="love-number">
+02
+</span>
+
+The way you convince me
+
+</button>
+
+
+<button
+class="love-button"
+onclick="love(3)"
+>
+
+<span class="love-number">
+03
+</span>
+
+Your 2 rupaye ke jokes 😭
+
+</button>
+
+
+<button
+class="love-button"
+onclick="love(4)"
+>
+
+<span class="love-number">
+04
+</span>
+
+The way you love me
+
+</button>
+
+
+</div>
+
+
+<div
+class="love-content"
+id="loveContent"
+></div>
+
+
+<br>
+
+
+<button
+class="btn secondary"
+onclick="go('s8')"
+>
+
+There's more... 🎵
+
+</button>
+
+</section>
+
+
+
+<!-- =========================
+     8. SONGS
+========================= -->
+
+<section class="screen" id="s8">
+
+<div class="small">
+Songs that remind me of you
+</div>
+
+<h2>
+Lyrics That Remind Me of You 🎵
+</h2>
+
+<p class="subtitle">
+
+Some things are easier to say through songs. ❤️
+
+</p>
+
+
+<div class="song-list">
+
+
+<!-- SONG 1 -->
+
+<div class="song">
+
+<div
+class="song-title"
+onclick="toggleSong(1)"
+>
+
+<span>
+🎵 Kho Gye
+</span>
+
+<span>
++
+</span>
+
+</div>
+
+
+<div
+class="song-body"
+id="song1"
+>
+
+<div class="lyrics">
+
+kaagaz ke panno pe me likhdu tera naam<br>
+
+lakeero me hi likhde tu anjaam<br>
+
+me tera tu meri<br>
+
+dheere dheere se kho gye<br>
+
+dheere se kho gye<br>
+
+kahi tu meri<br>
+
+dheere dheere se kho gye<br>
+
+dheere se kho gye
+
+</div>
+
+
+<!-- REPLACE YOUR_SPOTIFY_LINK_1 -->
+
+<a
+href="https://open.spotify.com/track/2QophXhN2Ls2URfoPmiviC?si=78AW7GnNRSiXBMwtnSHjMg&utm_source=copy-link&pi=wooNIIwzRN2cD"
+target="_blank"
+class="btn"
+>
+
+🎧 PLAY KHO GYE
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- SONG 2 -->
+
+<div class="song">
+
+<div
+class="song-title"
+onclick="toggleSong(2)"
+>
+
+<span>
+🎵 O Maahi
+</span>
+
+<span>
++
+</span>
+
+</div>
+
+
+<div
+class="song-body"
+id="song2"
+>
+
+<div class="lyrics">
+
+lo me Qayamat tak hua tera<br>
+
+lo me Qayamat tak hua tera<br>
+
+mere ishq pe haq hua tera<br>
+
+lo me Qayamat tak hua tera<br>
+
+maahii, maahi ve<br>
+
+oo maahive
+
+</div>
+
+
+<!-- REPLACE YOUR_SPOTIFY_LINK_2 -->
+
+<a
+href="https://open.spotify.com/track/2tjWCe2W7sgvS3C8NHcdtI?si=Ustq0cbGRmKITFw87hplWQ&utm_source=copy-link&pi=t0Y88laoT4aic"
+target="_blank"
+class="btn"
+>
+
+🎧 PLAY O MAAHI
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- SONG 3 -->
+
+<div class="song">
+
+<div
+class="song-title"
+onclick="toggleSong(3)"
+>
+
+<span>
+🎵 Hey Shona
+</span>
+
+<span>
++
+</span>
+
+</div>
+
+
+<div
+class="song-body"
+id="song3"
+>
+
+<div class="lyrics">
+
+tumhi mere har pal me<br>
+
+tum aaj me tum kal me<br>
+
+heyy shona<br>
+
+hey shonaa
+
+</div>
+
+
+<!-- REPLACE YOUR_SPOTIFY_LINK_3 -->
+
+<a
+href="https://open.spotify.com/track/0qQ4IdhjzNr0gJhdMTf2n3?si=7YDl_ikcQ1SE_CWGJoyOKQ&utm_source=copy-link&pi=PRi0aSGiRCGPT"
+target="_blank"
+class="btn"
+>
+
+🎧 PLAY HEY SHONA
+
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<br>
+
+
+<button
+class="btn"
+onclick="go('s9')"
+>
+
+Now comes the important part... 💌
+
+</button>
+
+</section>
+
+
+
+<!-- =========================
+     9. LETTER
+========================= -->
+
+<section class="screen" id="s9">
+
+<div class="small">
+Something I wanted to tell you...
+</div>
+
+<h2>
+For My Favourite Person ❤️
+</h2>
+
+
+<div class="letter">
+
+
+<p>
+<b>
+To my favourite person, ❤️
+</b>
+</p>
+
+
+<p>
+
+Happy Boyfriend Day to the person who somehow became such an important part of my life. 🫶🏻
+
+</p>
+
+
+<p>
+
+I don't think I say it enough, but I'm genuinely so grateful for you. For every little thing you do, every conversation, every stupid joke, every moment you make me smile, and even for the little things you probably don't realise mean so much to me.
+
+</p>
+
+
+<p>
+
+I love that with you, I can just be me. I can be silly, annoying, emotional, quiet, dramatic, or completely random—and somehow, you still choose to stay. 😭❤️ You've become one of those people whose presence itself makes everything feel a little better.
+
+</p>
+
+
+<p>
+
+And there's something I secretly pray for whenever I think about us. In Sha Allah, I hope we're not just a part of each other's lives for a little while. I hope Allah keeps us together through every phase, every difficult day, every change, and every beautiful moment that's yet to come. And if we're written for each other, I hope one day we get to make it official, build our little life together, and look back at all of this with a smile.
+
+</p>
+
+
+<p>
+
+I don't just want memories with you—I want years of them. And maybe that's why a part of me wishes that if Allah allows it, we stay together till Qayamat, and even meet each other again in Jannat. 🤍
+
+</p>
+
+
+<p>
+
+Thank you for being you. Thank you for making me feel loved, for listening to me, for putting up with my moods, and for giving me so many little moments that I'll probably remember for a very long time.
+
+</p>
+
+
+<p>
+
+You may not realise it, but you've become a really beautiful part of my life. And I hope you always remember that you are loved—not just on days like Boyfriend Day, but on all the completely ordinary days too.
+
+</p>
+
+
+<p>
+
+Happy Boyfriend Day, my love. ❤️
+
+</p>
+
+
+<p>
+
+Here's to us, to all the memories we've already made, and to all the ones I hope are still waiting for us.
+
+</p>
+
+
+<p class="special">
+
+And yes… I still have a hug pending. 🫂❤️
+
+</p>
+
+
+<p style="text-align:center;">
+
+Yours, always.
+
+</p>
+
+
+</div>
+
+
+<br>
+
+
+<button
+class="btn"
+onclick="go('s10')"
+>
+
+One last thing... 👀
+
+</button>
+
+</section>
+
+
+
+<!-- =========================
+     10. FINAL VIDEO
+========================= -->
+
+<section class="screen" id="s10">
+
+
+<div class="final-heart">
+❤️
+</div>
+
+
+<h1>
+Happy Boyfriend Day
+</h1>
+
+
+<p class="subtitle">
+
+You made it all the way here.<br>
+
+So... I saved one last thing for you.
+
+</p>
+
+
+<button
+class="btn secondary"
+onclick="unlockVideo()"
+>
+
+✨ UNLOCK ONE LAST THING ✨
+
+</button>
+
+
+<div
+class="video-box"
+id="videoBox"
+>
+
+<p class="subtitle">
+
+Okay... this one is just for you. 🥹❤️
+
+</p>
+
+
+<video
+controls
+playsinline
+>
+
+<source
+src="video/final-video.mp4"
+type="video/mp4"
+>
+
+Your browser does not support video.
+
+</video>
+
+
+</div>
+
+</section>
+
+
+
+<script>
+
+
+/* =========================
+   GO TO NEXT SCREEN
+========================= */
+
+function go(id){
+
+    document.querySelectorAll('.screen').forEach(screen => {
+
+        screen.classList.remove('active');
+
+    });
+
+
+    document.getElementById(id).classList.add('active');
+
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
+}
+
+
+
+/* =========================
+   WRONG ANSWERS
+========================= */
+
+function wrong(id,message){
+
+    document.getElementById(id).innerHTML = message;
+
+}
+
+
+
+/* =========================
+   GAME
+========================= */
+
+function gameAnswer(answer){
+
+    const result =
+    document.getElementById('gameResult');
+
+
+    if(answer === 'right'){
+
+        result.innerHTML =
+        "I KNEW IT 😭❤️ That's exactly the kind of stupid happiness I want with you.";
+
+
+        setTimeout(() => {
+
+            result.innerHTML +=
+            "<br><br>GAME COMPLETE ✨ You found my favourite kind of us.";
+
+
+            setTimeout(() => {
+
+                go('s7');
+
+            },1800);
+
+
+        },1000);
+
+
+    }else{
+
+        result.innerHTML =
+        "Hmmmm... cute answer, but I'm not accepting that one 😭❤️ Try again.";
+
+    }
+
+}
+
+
+
+/* =========================
+   THINGS I LOVE
+========================= */
+
+const loveTexts = {
+
+
+1:`
+
+<strong>
+♡ “Aaj pata hai kya hua?”
+</strong>
+
+<br><br>
+
+I love the way you actually show interest whenever I come to you with my
+“aaj pata hai kya hua?” 😭❤️
+
+You listen to every little detail, even when I probably tell you way too much.
+
+`,
+
+
+2:`
+
+<strong>
+♡ Your way of convincing me
+</strong>
+
+<br><br>
+
+I love how you always convince me when I'm angry—even when it's my fault,
+your fault, or whoever's fault it is...
+
+somehow, <b>it's always yours.</b> 😭😂❤️
+
+`,
+
+
+3:`
+
+<strong>
+♡ Your 2 rupaye ke jokes
+</strong>
+
+<br><br>
+
+I love how you make me feel comfortable whenever I'm not in a good mood.
+
+Somehow, you always manage to bring my spark back with your
+<b>2 rupaye ke jokes</b> 😭🙏🏻...
+
+and the worst part is,
+
+<b>I actually love them.</b> ❤️
+
+`,
+
+
+4:`
+
+<strong>
+♡ The way you love me
+</strong>
+
+<br><br>
+
+You always make me feel loved, valued, and cared for in a way no one ever has.
+
+And honestly, that's something I'll always 
