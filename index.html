@@ -1530,8 +1530,84 @@ and the worst part is,
 
 You always make me feel loved, valued, and cared for in a way no one ever has.
 
-And honestly, that's something I'll always 
+And honestly, that's something I'll always be grateful for that.
+
+<br><br>
+
+<b>
+
+Keep loving me and always take care of me —
+that's the important purpose of your life!!
+
+</b>
+
+😭❤️
+
+`
+
+};
+
+
+
+function love(number){
+
+    const box =
+    document.getElementById('loveContent');
+
+
+    box.innerHTML =
+    loveTexts[number];
+
+
+    box.classList.add('show');
+
+}
+
+
+
+/* =========================
+   SONGS
+========================= */
+
+function toggleSong(number){
+
+    const body =
+    document.getElementById('song' + number);
+
+
+    body.classList.toggle('show');
+
+}
+
+
+
+/* =========================
+   FINAL VIDEO
+========================= */
+
+function unlockVideo(){
+
+    const box =
+    document.getElementById('videoBox');
+
+
+    box.classList.add('show');
+
+
+    setTimeout(() => {
+
+        box.scrollIntoView({
+            behavior:'smooth',
+            block:'center'
+        });
+
+    },200);
+
+}
+
 </script>
+
+
 </body>
 </html>
 
